@@ -3,7 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 单独打包css
 const autoprefixer = require('autoprefixer'); // 自动加前缀的插件
 const pxtorem = require('postcss-pxtorem'); // 自动加前缀的插件
+const path = require('path');
 
+const svgDirs = [
+  require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
+  path.resolve(__dirname, 'src/Iconfont'),
+];
 
 module.exports = {
   devtool: false,
@@ -105,15 +110,21 @@ module.exports = {
            // 使用file-loader
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
+              name: '[name].[ext]?[hash]',
             },
           },
         ],
         exclude: /^node_modules$/,
       },
+
+      {
+        test: /\.(svg)$/i,
+        loader: 'svg-sprite-loader',
+        include: svgDirs,
+      },
       {
         // 处理静态资源
-        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svgz)(\?.+)?$/,
         exclude: /favicon\.png$/,
         use: [
           {
