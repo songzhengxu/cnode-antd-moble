@@ -28,59 +28,61 @@ module.exports = {
   module: {
     rules: [
       {
+        exclude: [
+          /\.less$/,
+          /\.svg$/,
+        ],
+      },
+      {
         test: /\.(js|jsx)$/,
         use: [
-          'babel-loader',
+          'babel-loader?cacheDirectory', 'eslint-loader',
         ],
         exclude: /^node_modules$/,
       },
       {
-        // 匹配.css文件
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?modules',
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins() {
-                  return [
-                    autoprefixer({
-                      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
-                    }),
-                    pxtorem({ rootValue: 100, propWhiteList: [] }),
-                  ];
-                },
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins() {
+                return [
+                  autoprefixer({
+                    browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                  }),
+                  pxtorem({ rootValue: 100, propWhiteList: [], minPixelValue: 2 }),
+                ];
               },
             },
-          ],
-        }),
+          },
+        ],
         exclude: /^node_modules$/,
       },
       {
-        // 匹配.less文件
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader?modules',
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins() {
-                  return [
-                    autoprefixer({
-                      browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
-                    }),
-                    pxtorem({ rootValue: 100, propWhiteList: [] }),
-                  ];
-                },
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins() {
+                return [
+                  autoprefixer({
+                    browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                  }),
+                  pxtorem({ rootValue: 100, propWhiteList: [], minPixelValue: 2 }),
+                ];
               },
             },
-            'less-loader',
-          ],
-        }),
+          },
+          'less-loader',
+        ],
         exclude: /^node_modules$/,
       },
       {

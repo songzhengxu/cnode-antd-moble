@@ -66,7 +66,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]',
+          'css-loader',
           {
             loader: 'postcss-loader',
             options: {
