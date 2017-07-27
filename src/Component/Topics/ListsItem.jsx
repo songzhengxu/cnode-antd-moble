@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 function ListsItem(props) {
   const { topics } = props;
@@ -8,7 +9,6 @@ function ListsItem(props) {
       <a href="">
         <p className="tit">
           <i className={topics.top ? 'top icon' : 'icon'}>置顶</i>
-
           {topics.title}</p>
         <dl>
           <dt className="avatars" >
@@ -17,8 +17,8 @@ function ListsItem(props) {
           <dd>
             <p className="name">{topics.author.loginname}</p>
             <p className="time">
-                2017-07-24T23:00:36
-                <span className="num">{topics.reply_count} / {topics.visit_count} </span>
+              {moment(topics.last_reply_at).format('YYYY-MM-DD')}
+              <span className="num">{topics.reply_count} / {topics.visit_count} </span>
             </p>
           </dd>
         </dl>
@@ -26,6 +26,7 @@ function ListsItem(props) {
     </li>
   );
 }
+
 ListsItem.propTypes = {
   topics: PropTypes.object.isRequired,
 };
