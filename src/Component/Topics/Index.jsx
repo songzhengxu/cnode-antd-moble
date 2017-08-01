@@ -16,7 +16,9 @@ class Main extends React.Component {
     return (
       <div className="App">
         <NavBar />
-        <TabPane {...this.props} />
+        <div className="g-content">
+          <TabPane {...this.props} />
+        </div>
         <TabBar />
       </div>
     );

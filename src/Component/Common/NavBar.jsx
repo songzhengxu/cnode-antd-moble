@@ -12,7 +12,7 @@ class Main extends React.Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="m-NavBar">
         <NavBar
           iconName="null"
           mode="dark"
