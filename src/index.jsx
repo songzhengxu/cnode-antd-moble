@@ -13,9 +13,8 @@ import store from './Config/Store'; // 引入Store
 
 
 /* eslint-disable */
-import 'normalize.css'
-import "./Style/reset.less"
-import './Style/style.less';
+import 'normalize.css';
+import './Style/index.css';
 
 // 订阅state改变
 store.subscribe(() => {

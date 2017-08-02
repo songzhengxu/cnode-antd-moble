@@ -3,6 +3,7 @@ import NavBar from '../Common/NavBar';
 import TabBar from '../Common/TabBar';
 import TabPane from './TabPane';
 
+import style from './index.css';
 
 class Main extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Main extends React.Component {
     return (
       <div className="App">
         <NavBar />
-        <div className="g-content">
+        <div className={style.content}>
           <TabPane {...this.props} />
         </div>
         <TabBar />

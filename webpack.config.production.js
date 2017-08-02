@@ -68,7 +68,7 @@ module.exports = {
         exclude: /^node_modules$/,
       },
       {
-        test: /\.less$/,
+        test: /\.css$/,
         use: [
           'style-loader',
           'css-loader',
@@ -86,9 +86,8 @@ module.exports = {
               },
             },
           },
-          'less-loader',
         ],
-        exclude: /^node_modules$/,
+        include: /^node_modules$/,
       },
       {
          // 匹配.html文件
@@ -138,7 +137,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.web.js', '.js', '.less', '.jsx', '.json'],
+    extensions: ['.web.js', '.js', '.jsx', '.json'],
     alias: {
       '~': `${__dirname}/src`,
     },

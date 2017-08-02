@@ -5,6 +5,8 @@ import { BASE_WP_URL } from '../Config/Config';
 const WP_URL = `${BASE_WP_URL}/api/v1/`;
 
 export const GET_TOPICS = 'GET_TOPICS ';
+export const GET_TOPIC = 'GET_TOPIC ';
+
 
 const defaultQuery = {
   page: 1,
@@ -24,6 +26,14 @@ export function getTopics(query = defaultQuery) {
 
   return {
     type: GET_TOPICS,
+    payload: request,
+  };
+}
+
+export function getTopic(query) {
+  const request = axios.get(`${WP_URL}topic/${query}`);
+  return {
+    type: GET_TOPIC,
     payload: request,
   };
 }

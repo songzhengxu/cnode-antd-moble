@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getTopics } from '../Action/Topics';
-import Topics from '../Component/Topics/Index';
+import Topics from '../Component/Topics';
 
 class TopicsContainer extends Component {
 

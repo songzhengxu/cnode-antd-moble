@@ -4,5 +4,6 @@
  */
 
  import topics from './Topics';
+ import topic from './Topic';
 
- export default { topics };
+ export default { topics, topic };

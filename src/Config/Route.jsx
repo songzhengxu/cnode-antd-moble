@@ -10,7 +10,14 @@ import Bundle from '../Bundle';
 import Home from '../Containers/TopicsContainer'; // 首页组件
 import NotFoundPage from '../Component/NotFoundPage'; // NotFoundPage
 
+// 异步加载
+import loadTopic  from 'bundle-loader?lazy!../Containers/TopicContainer'; // 主题详情
 
+const Topic = props => (
+  <Bundle load={loadTopic}>
+    {Topic => <Topic {...props} />}
+  </Bundle>
+);
 
 // 路由配置
 const RouteConfig = () => (
@@ -18,6 +25,7 @@ const RouteConfig = () => (
     <div className="app">
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/topic/:key" component={Topic} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

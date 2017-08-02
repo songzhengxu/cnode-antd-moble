@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavBar, Icon } from 'antd-mobile';
 
+import style from './index.css';
 
 class Main extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Main extends React.Component {
   }
   render() {
     return (
-      <div className="m-NavBar">
+      <div className={style.NavBar}>
         <NavBar
           iconName="null"
           mode="dark"

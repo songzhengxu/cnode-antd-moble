@@ -6,13 +6,13 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'redTab',
+      selectedTab: 'blueTab',
       hidden: false,
     };
   }
   render() {
     return (
-      <div className="App">
+      <div>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
