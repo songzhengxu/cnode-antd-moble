@@ -3,16 +3,10 @@ import PropTypes from 'prop-types';
 import { Tabs } from 'antd-mobile';
 import Lists from '../Lists';
 
-
 const TabPane = Tabs.TabPane;
 
-
 class TabPaneClass extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onTabClick = this.onTabClick.bind(this);
-  }
-  onTabClick(key) {
+  onTabClick= (key) => {
     this.props.getTopics({
       tab: key,
     });

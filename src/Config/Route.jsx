@@ -8,6 +8,7 @@ import Bundle from '../Bundle';
 //
 // // 同步加载
 import Home from '../Containers/TopicsContainer'; // 首页组件
+import ListView from '../Component/ListView'; // ListView
 import NotFoundPage from '../Component/NotFoundPage'; // NotFoundPage
 
 // 异步加载
@@ -25,6 +26,7 @@ const RouteConfig = () => (
     <div className="app">
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/list" component={ListView} />
         <Route exact path="/topic/:key" component={Topic} />
         <Route component={NotFoundPage} />
       </Switch>

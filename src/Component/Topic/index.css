@@ -2,3 +2,26 @@
   margin-top: 90px;
   font-size: 30px;
 }
+.name{
+ margin-bottom: 10px;
+ min-width: 360px;
+}
+.name span{
+   font-size: 26px;
+}
+.yuedu{
+  font-size: 24px;
+
+}
+.btn {
+  float: right;
+}
+.pinlunHead{
+   line-height: 60px;
+   background-color: #efefef;
+   padding-left: 10px;
+   border-left: 6px solid #108ee9;
+}
+.pl_num{
+  color:#108ee9;
+}
