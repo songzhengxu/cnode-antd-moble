@@ -24,7 +24,11 @@ class TopicMain extends React.Component {
     }
     return (
       <div className="App">
-        <NavBar />
+        <NavBar
+          {...this.props}
+          leftIcon="back"
+          title="详情"
+        />
         <div className={style.content}>
           <Card full>
             <Card.Header
@@ -36,6 +40,7 @@ class TopicMain extends React.Component {
                 <p className={style.yuedu}>阅读: {topic.visit_count} 回复:{topic.reply_count}</p>
               </div>}
               thumb={topic.author.avatar_url}
+              thumbStyle={{ width: 120 }}
               extra={
                 <Button className={style.btn} activeStyle="false" size="small" type="primary">关注</Button>
             }
@@ -48,7 +53,9 @@ class TopicMain extends React.Component {
             </Card.Body>
           </Card>
           <div className={style.pinlun}>
-            <div className={style.pinlunHead}> 共<span className={style.pl_num}>{topic.replies.length}</span>条评论 </div>
+            <div className={style.pinlunHead}>
+              共<span className={style.pl_num}>{topic.replies.length}</span>
+              条评论 </div>
             {
               topic.replies.map((replie, index) => (
                 <Card key={replie.id}>
@@ -59,6 +66,7 @@ class TopicMain extends React.Component {
                         <span className="data">{moment(replie.create_at, 'YYYYMMDD').fromNow()}</span>
                       </p>}
                     thumb={replie.author.avatar_url}
+                    thumbStyle={{ width: 120 }}
                     extra={<span>#{index}</span>}
                   />
                   <Card.Body>

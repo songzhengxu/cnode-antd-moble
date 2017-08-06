@@ -57,6 +57,7 @@
     "moment": "^2.18.1",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.5.10",
+    "rc-form": "^1.4.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.6",

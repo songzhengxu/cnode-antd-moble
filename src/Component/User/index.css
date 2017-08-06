@@ -1,0 +1,25 @@
+.content{
+  margin-top: 90px;
+  font-size: 30px;
+}
+.top{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #29a1f7;
+  color: #fff;
+  padding: 30px;
+}
+.img{
+  width: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.img img{
+  width: 100%;
+  display: inline-block;
+}
+.name{
+  margin-bottom: 20px;
+}

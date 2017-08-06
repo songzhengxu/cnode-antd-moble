@@ -1,16 +1,18 @@
 import React from 'react';
 import { TabBar, Icon } from 'antd-mobile';
+import PropTypes from 'prop-types';
 
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'blueTab',
+      selectedTab: 'topic',
       hidden: false,
     };
   }
   render() {
+    const { history, selectedTab } = this.props;
     return (
       <div>
         <TabBar
@@ -35,26 +37,20 @@ class Main extends React.Component {
                 background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  0.42rem 0.42rem no-repeat' }}
             />
           }
-            selected={this.state.selectedTab === 'blueTab'}
+            selected={selectedTab === 'topic'}
             onPress={() => {
-              this.setState({
-                selectedTab: 'blueTab',
-              });
+              history.push('/');
             }}
-            data-seed="logId"
           />
           <TabBar.Item
             icon={<Icon type="koubei-o" size="md" />}
             selectedIcon={<Icon type="koubei" size="md" />}
             title="发表"
             key="发表"
-            selected={this.state.selectedTab === 'redTab'}
+            selected={selectedTab === 'create'}
             onPress={() => {
-              this.setState({
-                selectedTab: 'redTab',
-              });
+              history.push('/topic/create');
             }}
-            data-seed="logId1"
           />
           <TabBar.Item
             icon={
@@ -75,12 +71,10 @@ class Main extends React.Component {
           }
             title="消息"
             key="消息"
-            dot
-            selected={this.state.selectedTab === 'greenTab'}
+            badge={4}
+            selected={selectedTab === 'message'}
             onPress={() => {
-              this.setState({
-                selectedTab: 'greenTab',
-              });
+              history.push('/messages');
             }}
           />
           <TabBar.Item
@@ -88,11 +82,9 @@ class Main extends React.Component {
             selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
             title="我的"
             key="我的"
-            selected={this.state.selectedTab === 'yellowTab'}
+            selected={selectedTab === 'my'}
             onPress={() => {
-              this.setState({
-                selectedTab: 'yellowTab',
-              });
+              history.push('/user');
             }}
           />
         </TabBar>
@@ -100,5 +92,9 @@ class Main extends React.Component {
     );
   }
   }
+Main.propTypes = {
+  history: PropTypes.object.isRequired,
+  selectedTab: PropTypes.string.isRequired,
+};
 
 export default Main;

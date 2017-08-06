@@ -5,5 +5,7 @@
 
  import topics from './Topics';
  import topic from './Topic';
+ import user from './User';
+ import messages from './Messages';
 
- export default { topics, topic };
+ export default { topics, topic, user, messages };

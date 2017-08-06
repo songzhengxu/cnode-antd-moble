@@ -16,11 +16,11 @@ class Main extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavBar />
+        <NavBar title="主题" />
         <div className={style.content}>
           <TabPane {...this.props} />
         </div>
-        <TabBar />
+        <TabBar {...this.props} selectedTab="topic" />
       </div>
     );
   }

@@ -1,0 +1,9 @@
+.content{
+  margin-top: 90px;
+  font-size: 30px;
+}
+.title{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
