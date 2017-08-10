@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getUser } from '../Action/Topics';
+import { getUser, loginOut } from '../Action';
 import User from '../Component/User';
 
 class UserContainer extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     // 获取用户详情
     const { params } = this.props.match;
-    this.props.getUser(params.id);
+    const { history, login } = this.props;
+    //
+    if (!params.id && login.loginname) {
+      history.push(`/user/${login.loginname}`);
+    } else {
+      this.props.getUser(params.id);
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    const { params } = nextProps.match;
+    // this.props.getUser(params.id);
   }
   render() {
     return (
@@ -22,8 +32,10 @@ class UserContainer extends Component {
 UserContainer.propTypes = {
   getUser: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  login: PropTypes.object.isRequired,
 };
 
 export default connect(state => (
-  { user: state.user }), { getUser },
+  { user: state.user, login: state.login }), { getUser, loginOut },
 )(UserContainer); // 连接redux
