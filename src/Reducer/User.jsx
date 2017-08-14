@@ -1,8 +1,10 @@
-import { GET_USER } from '../Action/Topics';
+import { GET_USER } from '../Action';
 
 const defaultState = {
   user: {},
-  loginname: '',
+  loading: false,
+  error_msg: '',
+  fail: false,
 };
 
 export default function user(state = defaultState, action) {

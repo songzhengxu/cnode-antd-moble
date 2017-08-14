@@ -16,9 +16,11 @@ import store from './Config/Store'; // 引入Store
 import 'normalize.css';
 import './Style/index.css';
 
+import  Tool  from './utils/Tool';
 // 订阅state改变
 store.subscribe(() => {
-    // console.log(store.getState());
+  // 把User保存在本地，防止刷新丢失
+  Tool.localItem('login', JSON.stringify(store.getState().login));
 });
 
 

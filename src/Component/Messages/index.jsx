@@ -31,6 +31,7 @@ class Messages extends Component {
     return (
       <div>
         <NavBar
+          {...this.props}
           leftIcon="left"
           title="消息"
         />

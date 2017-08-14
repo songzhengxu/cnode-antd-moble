@@ -1,3 +1,8 @@
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
 .content{
   margin-top: 90px;
   font-size: 30px;

@@ -9,7 +9,6 @@ moment.locale('zh-cn');
 
 function Lists(props) {
   const { datas } = props;
-  console.log(datas);
   return (
     <div>
       <ul className="topics_list">

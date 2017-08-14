@@ -7,5 +7,6 @@
  import topic from './Topic';
  import user from './User';
  import messages from './Messages';
+ import login from './Login';
 
- export default { topics, topic, user, messages };
+ export default { topics, topic, user, messages, login };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Card, Button } from 'antd-mobile';
+import { Card, Button, ActivityIndicator } from 'antd-mobile';
 
 import NavBar from '../Common/NavBar';
 import style from './index.css';
@@ -20,7 +20,10 @@ class TopicMain extends React.Component {
     });
     const { topic } = this.props.topic;
     if (!topic.id) {
-      return (<div>加载中</div>);
+      return (<div className={style.Loading}>
+        <ActivityIndicator size="large" />
+        <span style={{ marginTop: 8 }}>Loading...</span>
+      </div>);
     }
     return (
       <div className="App">

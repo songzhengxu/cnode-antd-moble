@@ -1,10 +1,10 @@
-import { GET_MESSAGES } from '../Action/Topics';
+import { GET_MESSAGES } from '../Action';
 
 const defaultState = {
   messages: {},
 };
 
-export default function user(state = defaultState, action) {
+export default function messages(state = defaultState, action) {
   switch (action.type) {
     case GET_MESSAGES:
       return {

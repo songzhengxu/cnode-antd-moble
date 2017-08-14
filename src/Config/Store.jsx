@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import reduxpromise from 'redux-promise';
 import reducer from '../Reducer/Index';
     // eslint-disable-next-line
@@ -7,7 +8,7 @@ import reducer from '../Reducer/Index';
 // 创建一个 Redux store 来以存放应用中所有的 state，应用中应有且仅有一个 store。
 const store = createStore(
     combineReducers(reducer),
-    composeEnhancers(applyMiddleware(reduxpromise),
+    composeEnhancers(applyMiddleware(thunk, reduxpromise),
   ),
 );
 

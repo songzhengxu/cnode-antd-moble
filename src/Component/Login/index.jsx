@@ -13,15 +13,17 @@ class Login extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.props.postLogin(values.key);
       }
     });
   }
   render() {
     const { getFieldProps } = this.props.form;
+    const { loading } = this.props.login;
     return (
       <div>
         <NavBar
+          {...this.props}
           leftIcon="left"
           title="登录"
         />
@@ -36,7 +38,9 @@ class Login extends Component {
           </List>
 
         </div>
-        <WingBlank className={style.btn} size="md"><Button onClick={this.handleSubmit} className="btn" type="primary">登录</Button></WingBlank>
+        <WingBlank className={style.btn} size="md">
+          <Button onClick={this.handleSubmit} loading={loading} className="btn" type="primary">登录</Button>
+        </WingBlank>
       </div>
     );
   }
@@ -44,6 +48,8 @@ class Login extends Component {
 
 Login.propTypes = {
   form: PropTypes.object.isRequired,
+  postLogin: PropTypes.func.isRequired,
+  login: PropTypes.object.isRequired,
 };
 const LoginWrapper = createForm()(Login);
 export default LoginWrapper;

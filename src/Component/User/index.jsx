@@ -19,16 +19,21 @@ export default class User extends Component {
     visible: false,
   };
   componentDidMount() {
-    console.log('dd');
+    // console.log('dd');
   }
   onSelect= (node) => {
+    const { history } = this.props;
     this.setState({
       visible: false,
     });
     if (node.key === 'logout') {
       alert('提示', '确认退出登录么???', [
-            { text: '取消', onPress: () => console.log('cancel') },
-            { text: '确定', onPress: () => console.log('执行退出登录操作') },
+            { text: '取消', onPress: () => {} },
+        { text: '确定',
+          onPress: () => {
+            this.props.loginOut();
+            history.push('/');
+          } },
       ]);
     }
   }
@@ -38,17 +43,21 @@ export default class User extends Component {
     });
   };
   render() {
-    const { user } = this.props;
+    const { user, login } = this.props;
     const data = user.user;
     let offsetX = -10; // just for pc demo
     if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
       offsetX = -26;
     }
+    const isLoginUser = data.loginname === login.loginname;
+    const title = isLoginUser ? '个人中心' : `${data.loginname}的资料`;
     return (
       <div>
         <NavBar
+          {...this.props}
           leftIcon="left"
-          rightContent={
+          title={title}
+          rightContent={isLoginUser ?
             <Popover
               mask
               overlayClassName="fortest"
@@ -75,7 +84,7 @@ export default class User extends Component {
               >
                 <Icon type="ellipsis" />
               </div>
-            </Popover>
+            </Popover> : {}
           }
         />
         <div className={style.content}>
@@ -98,10 +107,9 @@ export default class User extends Component {
                 <Lists datas={data.recent_replies || []} />
               </div>
             </TabPane>
-
           </Tabs>
         </div>
-        <TabBar {...this.props} selectedTab="my" />
+        <TabBar {...this.props} selectedTab={isLoginUser ? 'my' : ''} />
       </div>
     );
   }
@@ -109,4 +117,7 @@ export default class User extends Component {
 
 User.propTypes = {
   user: PropTypes.object.isRequired,
+  login: PropTypes.object.isRequired,
+  loginOut: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };

@@ -12,7 +12,7 @@ class Main extends React.Component {
     };
   }
   render() {
-    const { history, selectedTab } = this.props;
+    const { history, selectedTab, badge, loginname } = this.props;
     return (
       <div>
         <TabBar
@@ -71,10 +71,14 @@ class Main extends React.Component {
           }
             title="消息"
             key="消息"
-            badge={4}
+            badge={badge}
             selected={selectedTab === 'message'}
             onPress={() => {
-              history.push('/messages');
+              if (loginname) {
+                history.push('/messages');
+              } else {
+                history.push('/login');
+              }
             }}
           />
           <TabBar.Item
@@ -84,17 +88,27 @@ class Main extends React.Component {
             key="我的"
             selected={selectedTab === 'my'}
             onPress={() => {
-              history.push('/user');
+              if (loginname) {
+                history.push(`/user/${loginname}`);
+              } else {
+                history.push('/login');
+              }
             }}
           />
         </TabBar>
       </div>
     );
   }
-  }
+}
 Main.propTypes = {
   history: PropTypes.object.isRequired,
   selectedTab: PropTypes.string.isRequired,
+  loginname: PropTypes.string,
+  badge: PropTypes.number,
 };
 
+Main.defaultProps = {
+  loginname: '',
+  badge: null,
+};
 export default Main;

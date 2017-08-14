@@ -16,7 +16,7 @@ const svgDirs = [
 
 module.exports = {
   cache: true,
-  devtool: 'eval',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     index: [
       'react-hot-loader/patch',

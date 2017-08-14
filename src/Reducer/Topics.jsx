@@ -1,11 +1,10 @@
-import { GET_TOPICS } from '../Action/Topics';
+import { GET_TOPICS } from '../Action';
 
 const defaultState = {
   topics: [],
-  tab: '',
 };
 
-export default function topics(state = defaultState, action) {
+export default function login(state = defaultState, action) {
   switch (action.type) {
     case GET_TOPICS:
       return {

@@ -19,7 +19,6 @@ class Main extends React.Component {
   }
   render() {
     const { leftIcon, rightContent, title } = this.props;
-    console.log(rightContent);
     return (
       <div className={style.NavBar}>
         <NavBar
