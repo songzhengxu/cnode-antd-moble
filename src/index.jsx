@@ -21,6 +21,7 @@ import  Tool  from './utils/Tool';
 store.subscribe(() => {
   // 把User保存在本地，防止刷新丢失
   Tool.localItem('login', JSON.stringify(store.getState().login));
+  // 订阅全局的其他状态，
 });
 
 

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import NavBar from '../Common/NavBar';
 import TabBar from '../Common/TabBar';
 
-import style from './index.css';
+import style from './index.less';
 
 moment.locale('zh-cn');
 

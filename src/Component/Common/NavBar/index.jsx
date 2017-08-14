@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NavBar } from 'antd-mobile';
 
 
-import style from './index.css';
+import style from './index.less';
 
 class Main extends React.Component {
   constructor(props) {

@@ -5,9 +5,8 @@ import { Tabs, Popover, Icon, Modal } from 'antd-mobile';
 
 import NavBar from '../Common/NavBar';
 import TabBar from '../Common/TabBar';
-
-import style from './index.css';
 import Lists from './List';
+import style from './index.less';
 
 moment.locale('zh-cn');
 const Item = Popover.Item;

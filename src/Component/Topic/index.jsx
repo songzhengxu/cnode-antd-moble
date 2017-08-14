@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Card, Button, ActivityIndicator } from 'antd-mobile';
 
 import NavBar from '../Common/NavBar';
-import style from './index.css';
+import style from './index.less';
 
 import box from './markdown.css'; // markdown css
 

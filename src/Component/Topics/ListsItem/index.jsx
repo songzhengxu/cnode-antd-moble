@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import style from './index.css';
+import style from './index.less';
 
 class ListsItem extends Component {
   getTag(value, good) {

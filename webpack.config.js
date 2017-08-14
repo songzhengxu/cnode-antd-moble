@@ -66,26 +66,12 @@ module.exports = {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]',
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins() {
-                return [
-                  autoprefixer({
-                    browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
-                  }),
-                  pxtorem({ rootValue: 100, propWhiteList: [], minPixelValue: 2 }),
-                ];
-              },
-            },
-          },
+          'css-loader',
         ],
-        exclude: /node_modules/,
+        exclude: /^node_modules$/,
       },
       {
-        test: /\.css$/,
+        test: /\.less$/,
         use: [
           'style-loader',
           'css-loader',
@@ -103,8 +89,32 @@ module.exports = {
               },
             },
           },
+          'less-loader',
         ],
         include: /node_modules/,
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins() {
+                return [
+                  autoprefixer({
+                    browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                  }),
+                  pxtorem({ rootValue: 100, propWhiteList: [], minPixelValue: 2 }),
+                ];
+              },
+            },
+          },
+          'less-loader',
+        ],
+        exclude: /node_modules/,
       },
       {
          // 匹配.html文件
@@ -155,7 +165,7 @@ module.exports = {
 
   },
   resolve: {
-    extensions: ['.web.js', '.js', '.less', '.jsx', '.json'],
+    extensions: ['.web.js', '.jsx', '.js', '.less', '.json'],
     alias: {
       '~': `${__dirname}/src`,
     },

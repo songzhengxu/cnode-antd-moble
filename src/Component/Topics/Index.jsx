@@ -3,7 +3,7 @@ import NavBar from '../Common/NavBar';
 import TabBar from '../Common/TabBar';
 import TabPane from './TabPane';
 
-import style from './index.css';
+import style from './index.less';
 
 class Main extends React.Component {
   constructor(props) {

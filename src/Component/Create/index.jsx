@@ -4,7 +4,7 @@ import { createForm } from 'rc-form';
 import { Picker, List, InputItem, TextareaItem, Button, WhiteSpace, WingBlank } from 'antd-mobile';
 import NavBar from '../Common/NavBar';
 
-import style from './index.css';
+import style from './index.less';
 
 const district = [
   {

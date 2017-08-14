@@ -137,7 +137,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.web.js', '.js', '.jsx', '.json'],
+    extensions: ['.web.js', '.jsx', '.js', '.json'],
     alias: {
       '~': `${__dirname}/src`,
     },

@@ -5,7 +5,7 @@ import { createForm } from 'rc-form';
 
 import NavBar from '../Common/NavBar';
 
-import style from './index.css';
+import style from './index.less';
 
 
 class Login extends Component {

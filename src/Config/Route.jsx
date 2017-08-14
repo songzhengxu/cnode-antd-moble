@@ -14,7 +14,7 @@ import Create from '../Component/Create'; // 发表
 
 
 
-// 异步加载
+// // 异步加载
 import loadTopic  from 'bundle-loader?lazy!../Containers/TopicContainer'; // 主题详情
 import loadUser from 'bundle-loader?lazy!../Containers/UserContainer'; // 用户中心
 import loadMessages  from 'bundle-loader?lazy!../Containers/MessagesContainer'; // 消息
