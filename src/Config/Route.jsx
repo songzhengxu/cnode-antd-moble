@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch,Redirect } from 'react-router-dom';
 // bundle模型用来异步加载组件
 import Bundle from '../Bundle';
 
@@ -42,22 +43,43 @@ const Login = props => (
   </Bundle>
 );
 
+
+const PrivateRoute = ({ component: Component,loginname: loginname,  ...rest }) =>
+ (
+  <Route {...rest} render={props => (
+    loginname? (
+      <Component {...props}/>
+    ) : (
+      <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
+
 // 路由配置
-const RouteConfig = () => (
-  <Router>
-    <div className="app">
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/topic/create" component={Create} />
-        <Route exact path="/topic/:key" component={Topic} />
-        <Route exact path="/user/:id" component={User} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/messages" component={Messages} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </div>
-  </Router>
-);
+const RouteConfig = (props) => {
+  const  { loginname } = props.login;
+  return (
+    <Router>
+      <div className="app">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <PrivateRoute  loginname={loginname}  exact path="/topic/create" component={Create} />
+          <Route exact path="/topic/:key" component={Topic} />
+          <PrivateRoute  loginname={loginname} exact path="/user/" component={User} />
+          <Route exact path="/user/:id" component={User} />
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute  loginname={loginname} exact path="/messages" component={Messages} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </div>
+    </Router>
+  );
+}
 
 // 导出
-export default RouteConfig;
+export default connect(state => (
+  { login: state.login }),
+)(RouteConfig); // 连接redux

@@ -15,7 +15,13 @@ class Main extends React.Component {
   }
   leftClick = () => {
     const { history } = this.props;
-    history.goBack();
+    // 如果历史记录个数小于等于1，则跳转到首页，
+    // 比如打开别人的分享详情页面，则历史记录为1 ；  history.goBack()没反应
+    if (history.length <= 1) {
+      history.push('/');
+    } else {
+      history.goBack();
+    }
   }
   render() {
     const { leftIcon, rightContent, title } = this.props;

@@ -1,7 +1,7 @@
 import React from 'react';
-import { TabBar, Icon } from 'antd-mobile';
+import { TabBar } from 'antd-mobile';
 import PropTypes from 'prop-types';
-
+import style from './index.less';
 
 class Main extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class Main extends React.Component {
     };
   }
   render() {
-    const { history, selectedTab, badge, loginname } = this.props;
+    const { history, selectedTab, badge } = this.props;
     return (
       <div>
         <TabBar
@@ -23,19 +23,17 @@ class Main extends React.Component {
           <TabBar.Item
             title="主题"
             key="主题"
-            icon={<div
-              style={{
-                width: '0.44rem',
-                height: '0.44rem',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  0.42rem 0.42rem no-repeat' }}
-            />
+            icon={<div className={style.icon}>
+              <svg className="icon" aria-hidden="true">
+                <use xlinkHref="#icon-tiezi" />
+              </svg>
+            </div>
           }
-            selectedIcon={<div
-              style={{
-                width: '0.44rem',
-                height: '0.44rem',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  0.42rem 0.42rem no-repeat' }}
-            />
+            selectedIcon={<div className={style.icon}>
+              <svg className="icon" aria-hidden="true">
+                <use xlinkHref="#icon-tiezi" />
+              </svg>
+            </div>
           }
             selected={selectedTab === 'topic'}
             onPress={() => {
@@ -43,8 +41,16 @@ class Main extends React.Component {
             }}
           />
           <TabBar.Item
-            icon={<Icon type="koubei-o" size="md" />}
-            selectedIcon={<Icon type="koubei" size="md" />}
+            icon={<div className={style.icon}>
+              <svg className="icon" aria-hidden="true">
+                <use xlinkHref="#icon-fabiao" />
+              </svg>
+            </div>}
+            selectedIcon={<div className={style.icon}>
+              <svg className="icon" aria-hidden="true">
+                <use xlinkHref="#icon-fabiao" />
+              </svg>
+            </div>}
             title="发表"
             key="发表"
             selected={selectedTab === 'create'}
@@ -54,45 +60,43 @@ class Main extends React.Component {
           />
           <TabBar.Item
             icon={
-              <div
-                style={{
-                  width: '0.44rem',
-                  height: '0.44rem',
-                  background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  0.42rem 0.42rem no-repeat' }}
-              />
+              <div className={style.icon}>
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-xiaoxi" />
+                </svg>
+              </div>
           }
             selectedIcon={
-              <div
-                style={{
-                  width: '0.44rem',
-                  height: '0.44rem',
-                  background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  0.42rem 0.42rem no-repeat' }}
-              />
+              <div className={style.icon}>
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-xiaoxi" />
+                </svg>
+              </div>
           }
             title="消息"
             key="消息"
             badge={badge}
             selected={selectedTab === 'message'}
             onPress={() => {
-              if (loginname) {
-                history.push('/messages');
-              } else {
-                history.push('/login');
-              }
+              history.push('/messages');
             }}
           />
           <TabBar.Item
-            icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-            selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
+            icon={<div className={style.icon}>
+              <svg className="icon" aria-hidden="true">
+                <use xlinkHref="#icon-gerenzhongxinxia" />
+              </svg>
+            </div>}
+            selectedIcon={<div className={style.icon}>
+              <svg className="icon" aria-hidden="true">
+                <use xlinkHref="#icon-gerenzhongxinxia" />
+              </svg>
+            </div>}
             title="我的"
             key="我的"
             selected={selectedTab === 'my'}
             onPress={() => {
-              if (loginname) {
-                history.push(`/user/${loginname}`);
-              } else {
-                history.push('/login');
-              }
+              history.push('/user/');
             }}
           />
         </TabBar>
@@ -103,12 +107,9 @@ class Main extends React.Component {
 Main.propTypes = {
   history: PropTypes.object.isRequired,
   selectedTab: PropTypes.string.isRequired,
-  loginname: PropTypes.string,
   badge: PropTypes.number,
 };
-
 Main.defaultProps = {
-  loginname: '',
   badge: null,
 };
 export default Main;

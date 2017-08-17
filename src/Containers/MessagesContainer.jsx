@@ -10,8 +10,8 @@ class MessagesContainer extends Component {
   componentWillMount() {
     // 获取用户消息
 
-    const { accessToken } = this.props.login;
-    this.props.getMessages(accessToken);
+    const { accesstoken } = this.props.login;
+    this.props.getMessages({ accesstoken });
 
     // 标记全部为已读
     // this.props.markAllmsg(accessToken);

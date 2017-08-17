@@ -14,6 +14,7 @@ import store from './Config/Store'; // 引入Store
 
 /* eslint-disable */
 import 'normalize.css';
+import './Style/reset.css';
 import './Style/index.css';
 
 import  Tool  from './utils/Tool';

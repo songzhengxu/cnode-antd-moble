@@ -9,8 +9,16 @@ class UserContainer extends Component {
 
   componentDidMount() {
     // 获取用户详情
+    const { history, login } = this.props;
     const { params } = this.props.match;
-    this.props.getUser(params.id);
+    if (params.id) {
+      this.props.getUser(params.id);
+    } else if (!params.id && login.loginname) {
+      history.push(`/user/${login.loginname}`);
+      this.props.getUser(login.loginname);
+    } else {
+      history.push('/login');
+    }
   }
   render() {
     return (
@@ -22,8 +30,8 @@ class UserContainer extends Component {
 UserContainer.propTypes = {
   getUser: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
-  // history: PropTypes.object.isRequired,
-  // login: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  login: PropTypes.object.isRequired,
 };
 
 export default connect(state => (

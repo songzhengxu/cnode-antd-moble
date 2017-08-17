@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Card, Button, ActivityIndicator } from 'antd-mobile';
+import { Card, ActivityIndicator } from 'antd-mobile';
 
 import NavBar from '../Common/NavBar';
 import style from './index.less';
@@ -18,6 +18,7 @@ class TopicMain extends React.Component {
     const createMarkup = content => ({
       __html: content,
     });
+    const { collect, replies, ups } = this.props;
     const { topic } = this.props.topic;
     if (!topic.id) {
       return (<div className={style.Loading}>
@@ -45,7 +46,11 @@ class TopicMain extends React.Component {
               thumb={topic.author.avatar_url}
               thumbStyle={{ width: 120 }}
               extra={
-                <Button className={style.btn} activeStyle="false" size="small" type="primary">关注</Button>
+                <div className={style.icon} onClick={() => collect(topic.id)}>
+                  <svg className="icon" aria-hidden="true">
+                    <use xlinkHref={topic.is_collect ? '#icon-shoucang1' : '#icon-shoucang'} />
+                  </svg>
+                </div>
             }
             />
             <Card.Body>
@@ -78,7 +83,21 @@ class TopicMain extends React.Component {
                       dangerouslySetInnerHTML={createMarkup(replie.content)}
                     />
                   </Card.Body>
-                  <Card.Footer extra={<div> 点赞 回复 </div>} />
+                  <Card.Footer
+                    extra={<div>
+                      <div className={style.icon2} onClick={replies}>
+                        <svg className="icon" aria-hidden="true">
+                          <use xlinkHref="#icon-pinglun" />
+                        </svg>
+                      </div>
+                      <div className={style.icon2} onClick={ups}>
+                        <svg className="icon" aria-hidden="true">
+                          <use xlinkHref="#icon-dianzan" />
+                        </svg>
+                      </div>
+
+                    </div>}
+                  />
                 </Card>
               ))
             }
@@ -91,6 +110,9 @@ class TopicMain extends React.Component {
 }
 TopicMain.propTypes = {
   topic: PropTypes.object.isRequired,
+  collect: PropTypes.func.isRequired,
+  replies: PropTypes.func.isRequired,
+  ups: PropTypes.func.isRequired,
 };
 
 

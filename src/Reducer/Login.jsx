@@ -15,6 +15,7 @@ export default function login(state = Tool.localItem('login') ? JSON.parse(Tool.
       return {
         ...defaultState,
         loginname: action.loginname,
+        accesstoken: action.accesstoken,
         loading: action.loading,
         error_msg: action.error_msg,
         fail: action.fail,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import style from './index.css';
+import style from './index.less';
 
 moment.locale('zh-cn');
 
