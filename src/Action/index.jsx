@@ -10,7 +10,6 @@ export const LOGIN = 'LOGIN'; // 登录
 export const LOGINOUT = 'LOGINOUT'; // 退出登录
 export const GET_USER = 'GET_USER'; // 获取用户信息
 export const GET_MESSAGES = 'GET_MESSAGES'; // 获取消息
-export const POST_COLLECT = 'POST_COLLECT'; // 收藏帖子
 
 
 const defaultQuery = {
@@ -36,7 +35,7 @@ export function getTopics(query = defaultQuery) {
 }
 // 获取文章详情
 export function getTopic(query) {
-  const request = axios.get(`${WP_URL}topic/${query}`);
+  const request = axios.get(`${WP_URL}topic/${query.id}?accesstoken=${query.accesstoken}`);
   return {
     type: GET_TOPIC,
     payload: request,
@@ -102,15 +101,5 @@ export const postLogin = query => async (dispatch) => {
 export function loginOut() {
   return {
     type: LOGINOUT,
-  };
-}
-// 获取消息
-export function postCollect(query) {
-  const request = axios.post(`${WP_URL}/topic_collect/collect`, {
-    ...query,
-  });
-  return {
-    type: POST_COLLECT,
-    payload: request,
   };
 }

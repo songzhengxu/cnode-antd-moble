@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getTopics } from '../Action';
-import Topics from '../Component/Topics';
+
+import Topics from '../Component/Topics/';
 
 class TopicsContainer extends Component {
-
   componentWillMount() {
     this.props.getTopics();
   }

@@ -6,7 +6,7 @@ import { Card, ActivityIndicator } from 'antd-mobile';
 import NavBar from '../Common/NavBar';
 import style from './index.less';
 
-import box from './markdown.css'; // markdown css
+import box from './markdown.less'; // markdown css
 
 moment.locale('zh-cn');
 
@@ -46,7 +46,7 @@ class TopicMain extends React.Component {
               thumb={topic.author.avatar_url}
               thumbStyle={{ width: 120 }}
               extra={
-                <div className={style.icon} onClick={() => collect(topic.id)}>
+                <div className={style.icon} onClick={() => collect(topic.id, topic.is_collect)}>
                   <svg className="icon" aria-hidden="true">
                     <use xlinkHref={topic.is_collect ? '#icon-shoucang1' : '#icon-shoucang'} />
                   </svg>
@@ -90,9 +90,9 @@ class TopicMain extends React.Component {
                           <use xlinkHref="#icon-pinglun" />
                         </svg>
                       </div>
-                      <div className={style.icon2} onClick={ups}>
+                      <div className={style.icon2} onClick={() => ups(topic.id, replie.id)}>
                         <svg className="icon" aria-hidden="true">
-                          <use xlinkHref="#icon-dianzan" />
+                          <use xlinkHref={replie.is_uped ? '#icon-dianzan1' : '#icon-dianzan'} />
                         </svg>
                       </div>
 
