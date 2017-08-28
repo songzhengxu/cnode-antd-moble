@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Card, ActivityIndicator } from 'antd-mobile';
+import { Card, ActivityIndicator, WingBlank } from 'antd-mobile';
 
 import NavBar from '../Common/NavBar';
-import style from './index.less';
+import CommentList from './CommentList';
+import CommentBox from './CommentBox';
 
+import style from './index.less';
 import box from './markdown.less'; // markdown css
 
 moment.locale('zh-cn');
@@ -60,49 +62,22 @@ class TopicMain extends React.Component {
               />
             </Card.Body>
           </Card>
-          <div className={style.pinlun}>
-            <div className={style.pinlunHead}>
-              共<span className={style.pl_num}>{topic.replies.length}</span>
-              条评论 </div>
-            {
-              topic.replies.map((replie, index) => (
-                <Card key={replie.id}>
-                  <Card.Header
-                    title={
-                      <p className={style.name}>
-                        {replie.author.loginname} &nbsp;
-                        <span className="data">{moment(replie.create_at, 'YYYYMMDD').fromNow()}</span>
-                      </p>}
-                    thumb={replie.author.avatar_url}
-                    thumbStyle={{ width: 120 }}
-                    extra={<span>#{index}</span>}
-                  />
-                  <Card.Body>
-                    <div
-                      className={box.markdown}
-                      dangerouslySetInnerHTML={createMarkup(replie.content)}
-                    />
-                  </Card.Body>
-                  <Card.Footer
-                    extra={<div>
-                      <div className={style.icon2} onClick={replies}>
-                        <svg className="icon" aria-hidden="true">
-                          <use xlinkHref="#icon-pinglun" />
-                        </svg>
-                      </div>
-                      <div className={style.icon2} onClick={() => ups(topic.id, replie.id)}>
-                        <svg className="icon" aria-hidden="true">
-                          <use xlinkHref={replie.is_uped ? '#icon-dianzan1' : '#icon-dianzan'} />
-                        </svg>
-                      </div>
-
-                    </div>}
-                  />
-                </Card>
-              ))
-            }
-
-          </div>
+          <CommentList
+            topic={topic}
+            repliesList={topic.replies}
+            replies={replies}
+            ups={ups}
+          />
+        </div>
+        <div className={style.commentInput}>
+          <WingBlank size="lg">
+            <CommentBox
+              topicId={topic.id}
+              repliesId={this.props.repliesId}
+              cancelReplie={this.props.cancelReplie}
+              submitComment={this.props.submitComment}
+            />
+          </WingBlank>
         </div>
       </div>
     );
@@ -110,9 +85,13 @@ class TopicMain extends React.Component {
 }
 TopicMain.propTypes = {
   topic: PropTypes.object.isRequired,
+  repliesId: PropTypes.object.isRequired,
   collect: PropTypes.func.isRequired,
   replies: PropTypes.func.isRequired,
   ups: PropTypes.func.isRequired,
+  cancelReplie: PropTypes.func.isRequired,
+  submitComment: PropTypes.func.isRequired,
+
 };
 
 

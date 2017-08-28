@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer'); // 自动加前缀的插件
 const pxtorem = require('postcss-pxtorem'); // 自动计算Rem
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 const svgDirs = [
   require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
@@ -16,7 +18,7 @@ const svgDirs = [
 
 module.exports = {
   cache: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval',
   entry: {
     index: [
       'react-hot-loader/patch',
@@ -33,7 +35,7 @@ module.exports = {
       './index.jsx',
       // 我们 app 的入口文件
     ],
-    vendor: ['react', 'react-dom'],
+    vendor: ['bundle-loader', 'rc-form', 'react-hot-loader', 'redux-promise', 'redux-thunk'],
   },
   output: {
     filename: '[name].js',
@@ -170,6 +172,18 @@ module.exports = {
       '~': `${__dirname}/src`,
     },
   },
+  externals: {
+    moment: 'moment',
+    axios: 'axios',
+    react: 'React',
+    redux: 'Redux',
+    'react-dom': 'ReactDOM',
+    'react-redux': 'ReactRedux',
+    'react-router': 'ReactRouter',
+    'react-router-dom': 'ReactRouterDOM',
+    'prop-types': 'PropTypes',
+    'babel-polyfill': 'window',
+  },
   plugins: [
     // 将第三方库单独打包
     new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }),
@@ -177,7 +191,8 @@ module.exports = {
       // 开启全局的模块热替换(HMR)
     new webpack.NamedModulesPlugin(),
     // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
-
+    new BundleAnalyzerPlugin(),
+    // webpack打包性能分析插件
     new HtmlWebpackPlugin({
       template: './Template/index.html',
       filename: './index.html', // 生成的html存放路径，相对于 path

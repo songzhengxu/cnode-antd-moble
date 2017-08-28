@@ -16,7 +16,7 @@ module.exports = {
     index: [
       './index.jsx',
     ],
-    vendor: ['react', 'react-dom'],
+    vendor: ['bundle-loader', 'rc-form', 'react-hot-loader', 'redux-promise', 'redux-thunk'],
   },
   output: {
     filename: '[name].[chunkhash].js',
@@ -50,25 +50,11 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins() {
-                return [
-                  autoprefixer({
-                    browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
-                  }),
-                  pxtorem({ rootValue: 100, propWhiteList: [], minPixelValue: 2 }),
-                ];
-              },
-            },
-          },
         ],
         exclude: /^node_modules$/,
       },
       {
-        test: /\.css$/,
+        test: /\.less$/,
         use: [
           'style-loader',
           'css-loader',
@@ -86,8 +72,32 @@ module.exports = {
               },
             },
           },
+          'less-loader',
         ],
-        include: /^node_modules$/,
+        include: /node_modules/,
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins() {
+                return [
+                  autoprefixer({
+                    browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                  }),
+                  pxtorem({ rootValue: 100, propWhiteList: [], minPixelValue: 2 }),
+                ];
+              },
+            },
+          },
+          'less-loader',
+        ],
+        exclude: /node_modules/,
       },
       {
          // 匹配.html文件
@@ -141,6 +151,18 @@ module.exports = {
     alias: {
       '~': `${__dirname}/src`,
     },
+  },
+  externals: {
+    moment: 'moment',
+    axios: 'axios',
+    react: 'React',
+    redux: 'Redux',
+    'react-dom': 'ReactDOM',
+    'react-redux': 'ReactRedux',
+    'react-router': 'ReactRouter',
+    'react-router-dom': 'ReactRouterDOM',
+    'prop-types': 'PropTypes',
+    'babel-polyfill': 'window',
   },
   plugins: [
     // 将第三方库单独打包

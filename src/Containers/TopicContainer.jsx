@@ -10,7 +10,15 @@ import Api from '../utils/Api';
 const alert = Modal.alert;
 
 class TopicContainer extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      repliesId: {
+        user: '',
+        reply_id: '',
+      },
+    };
+  }
   componentWillMount() {
     // 获取主题详情
     const { params } = this.props.match;
@@ -25,6 +33,7 @@ class TopicContainer extends Component {
   componentWillUnmount() {
     this.props.clearTopic();
   }
+  // 提示登录
   showelert =() => {
     const { history } = this.props;
     alert('登录', '需要登录后操作', [
@@ -37,6 +46,7 @@ class TopicContainer extends Component {
       },
     ]);
   }
+  // 收藏
   collect=(topicId, isCollect) => {
     const { accesstoken } = this.props.login;
     if (!accesstoken) {
@@ -66,13 +76,35 @@ class TopicContainer extends Component {
       }).catch(e => console.log(e));
     }
   }
-  replies = () => {
-    alert('replies');
+  // 回复评论
+  replies = (replieId, name) => {
+    this.setState({
+      repliesId: {
+        user: name,
+        reply_id: replieId,
+      },
+    });
+    window.scrollTo(0, document.body.scrollHeight);
   }
-  ups = (topicId, replieId) => {
-    const { accesstoken } = this.props.login;
+  // 取消回复评论
+  cancelReplie=() => {
+    this.setState({
+      repliesId: {
+        topicId: '',
+        user: '',
+        reply_id: '',
+      },
+    });
+  }
+  // 给评论点赞
+  ups = (topicId, replieId, userName) => {
+    const { accesstoken, loginname } = this.props.login;
     if (!accesstoken) {
       this.showelert();
+      // 不能给自己的评论点赞
+      // code...
+    } else if (userName === loginname) {
+      Toast.fail('不能给自己点赞', 1);
     } else {
       // 点赞
       const response = Api.postUps({
@@ -89,6 +121,33 @@ class TopicContainer extends Component {
             accesstoken,
           });
         }
+      }).catch((e) => {
+        console.log(e);
+      });
+    }
+  }
+  // 提交评论
+  submitComment=(topicId, content) => {
+    const { accesstoken } = this.props.login;
+
+    if (!accesstoken) {
+      this.showelert();
+    } else {
+      const response = Api.postComment({
+        accesstoken,
+        content,
+        id: topicId,
+        reply_id: this.state.repliesId.reply_id,
+      });
+      response.then((v) => {
+        if (v.data.success) {
+          Toast.success('评论成功', 1);
+          // 刷新数据
+          this.props.getTopic({
+            id: topicId,
+            accesstoken,
+          });
+        }
       }).catch(e => console.log(e));
     }
   }
@@ -98,6 +157,9 @@ class TopicContainer extends Component {
         collect={this.collect}
         replies={this.replies}
         ups={this.ups}
+        repliesId={this.state.repliesId}
+        cancelReplie={this.cancelReplie}
+        submitComment={this.submitComment}
         {...this.props}
       />
     );

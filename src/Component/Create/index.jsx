@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createForm } from 'rc-form';
-import { Picker, List, InputItem, TextareaItem, Button, WhiteSpace, WingBlank } from 'antd-mobile';
+import { Picker, List, InputItem, TextareaItem, Button, WhiteSpace, WingBlank, Toast } from 'antd-mobile';
 import NavBar from '../Common/NavBar';
 
 import style from './index.less';
@@ -24,11 +24,13 @@ const district = [
 class CreateMain extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.form.validateFields((err, values) => {
-    //   if (!err) {
-    //     console.log('Received values of form: ', values);
-    //   }
-    // });
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.posttopics(values);
+      } else {
+        Toast.fail('请完成表单', 1);
+      }
+    });
   }
   render() {
     const { getFieldProps } = this.props.form;
@@ -36,19 +38,27 @@ class CreateMain extends React.Component {
       <div className="App">
         <NavBar {...this.props} leftIcon="back" />
         <div className={style.content}>
-          <Picker data={district} cols={1} {...getFieldProps('type')} className="forss">
+          <Picker
+            data={district} cols={1} {...getFieldProps('type')} className="forss"
+          >
             <List.Item arrow="horizontal">选择类型</List.Item>
           </Picker>
           <List>
             <InputItem
-              {...getFieldProps('title')}
+              {...getFieldProps('title',
+                {
+                  rules: [{ required: true, message: '请输入标题!' }],
+                },
+              )}
               clear
               placeholder="请输入标题"
             >标题</InputItem>
           </List>
           <List>
             <TextareaItem
-              {...getFieldProps('content')}
+              {...getFieldProps('content', {
+                rules: [{ required: true, message: '请输入内容!' }],
+              })}
               rows={10}
               placeholder="请输入内容"
             />
@@ -62,7 +72,8 @@ class CreateMain extends React.Component {
 }
 CreateMain.propTypes = {
   form: PropTypes.object.isRequired,
+  posttopics: PropTypes.func.isRequired,
 };
 
-const TestWrapper = createForm()(CreateMain);
-export default TestWrapper;
+const CreateWrapper = createForm()(CreateMain);
+export default CreateWrapper;

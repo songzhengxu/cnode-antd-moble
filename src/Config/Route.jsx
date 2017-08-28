@@ -11,7 +11,7 @@ import Bundle from '../Bundle';
 import Home from '../Containers/TopicsContainer'; // 首页组件
 import NotFoundPage from '../Component/NotFoundPage'; // NotFoundPage
 
-import Create from '../Component/Create'; // 发表
+
 
 
 
@@ -20,7 +20,7 @@ import loadTopic  from 'bundle-loader?lazy!../Containers/TopicContainer'; // 主
 import loadUser from 'bundle-loader?lazy!../Containers/UserContainer'; // 用户中心
 import loadMessages  from 'bundle-loader?lazy!../Containers/MessagesContainer'; // 消息
 import loadLogin from  'bundle-loader?lazy!../Containers/LoginContainer'; // 登录
-
+import loadCreate from 'bundle-loader?lazy!../Containers/CreateContainer'; // 发表
 
 const Topic = props => (
   <Bundle load={loadTopic}>
@@ -42,7 +42,11 @@ const Login = props => (
     {Login => <Login {...props} />}
   </Bundle>
 );
-
+const Create = props => (
+  <Bundle load={loadCreate}>
+    {Create => <Create {...props} />}
+  </Bundle>
+);
 
 const PrivateRoute = ({ component: Component,loginname: loginname,  ...rest }) =>
  (
