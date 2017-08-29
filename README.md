@@ -7,6 +7,11 @@ cnode-antd-moble
 
 ---
 
+线上预览地址
+------------
+
+[http://cnode.fanweimei.com/](http://cnode.fanweimei.com/)
+
 快速开始
 --------
 
