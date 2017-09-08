@@ -10,7 +10,7 @@ cnode-antd-moble
 线上预览地址
 ------------
 
-[http://cnode.fanweimei.com/](http://cnode.fanweimei.com/)
+[https://cnode.songzhengxu.cn/](https://cnode.songzhengxu.cn/)
 
 快速开始
 --------
